@@ -5,12 +5,24 @@ import tkinter.ttk as ttk
 root = tk.Tk()
 label = tk.Label(
     text="CarMD by Sarah",
-    foreground="white",
-    background="black"
+    fg="white",
+    bg="#34A2FE",
+    width=10,
+    height=10,
+    padx=10
     )
-
-ttklabel = ttk.Label(text="CarMD by Sarah")
 label.pack()
-ttklabel.pack()
+
+button = tk.Button(
+    text="click me",
+    width=25,
+    height=5,
+    bg="blue",
+    fg="yellow"
+)
+button.pack()
+
+entry = tk.Entry(fg="yellow", bg="blue", width=50)
+
 
 root.mainloop()

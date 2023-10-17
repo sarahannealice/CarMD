@@ -1,5 +1,6 @@
 # CarMD
 Web scraping troubleshooting app for vehicles in Python
+note: a lot of the information is from https://repairpal.com/symptoms
 
 
 note to self:
