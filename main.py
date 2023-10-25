@@ -4,16 +4,18 @@ import tkinter.ttk as ttk
 import requests
 from bs4 import BeautifulSoup
 
+from common_symptoms import symptoms
+
 root = tk.Tk()
 root.title("CarMD")
-# root.geometry("600x400")
+root.geometry("600x400")
 root.resizable(width=False, height=False)
 root.configure(bg="pink")
 
 frame = tk.Frame(
     master=root,
     padx=10,
-    pady=10
+    pady=10,
 )
 frame.pack()
 
@@ -21,30 +23,23 @@ label = tk.Label(
     master=frame,
     text="CarMD by Sarah",
     fg="navy",
-    bg="pink",
     font=("Ariel", 18),
-    width=10,
-    height=3,
-    padx=20
     )
 label.grid(row=0, column=0, columnspan=2)
 
 btn_left = tk.Button(
     master=frame,
     text="common symptoms",
-    width=25,
-    height=5,
     bg="blue",
     fg="yellow",
-    font=16
+    font=16,
+    command=lambda: symptoms(root, frame)
 )
 btn_left.grid(row=1, column=0)
 
 btn_right = tk.Button(
     master=frame,
     text="warning lights",
-    width=25,
-    height=5,
     bg="orange",
     fg="black",
     font=16
