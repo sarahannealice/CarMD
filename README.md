@@ -11,6 +11,10 @@ colour names include:
 * green
 * blue
 * purple
+* navy
+* light blue
+* light grey
+* grey
 * and more <https://www.tcl.tk/man/tcl/TkCmd/colors.html>
 
 resources:
