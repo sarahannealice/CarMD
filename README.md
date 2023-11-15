@@ -1,5 +1,5 @@
 # CarMD
-Web scraping troubleshooting app for vehicles in Python
+Troubleshooting app for vehicles in Python using Tkinter & Beautiful Soup
 note: a lot of the troubleshooting information is from https://repairpal.com/symptoms
 
 
