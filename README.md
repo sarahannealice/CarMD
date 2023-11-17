@@ -15,6 +15,7 @@ colour names include:
 * light blue
 * light grey
 * grey
+* sea green (light/medium)
 * and more <https://www.tcl.tk/man/tcl/TkCmd/colors.html>
 
 resources:

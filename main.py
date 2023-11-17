@@ -3,6 +3,7 @@ import tkinter as tk
 import tkinter.ttk as ttk
 
 from common_symptoms import symptoms_layout
+from repair_costs import repairs
 
 root = tk.Tk()
 root.title("CarMD")
@@ -17,13 +18,20 @@ frame = tk.Frame(
 )
 frame.pack(side="top")
 
+btn = tk.Button(
+    master=frame,
+    text="bs4",
+    command=lambda:repairs(root, frame)
+)
+btn.grid(row=0, column=1)
+
 label = tk.Label(
     master=frame,
     text="CarMD by Sarah",
     fg="navy",
     font=("Ariel", 18),
     )
-label.grid(row=0, column=0, columnspan=2)
+label.grid(row=0, column=0)
 
 btn_left = tk.Button(
     master=frame,
