@@ -21,7 +21,7 @@ frame.pack(side="top")
 btn = tk.Button(
     master=frame,
     text="bs4",
-    command=lambda:repairs(root, frame)
+    command=lambda:repairs(root, frame, "Heater Repair Costs")
 )
 btn.grid(row=0, column=1)
 

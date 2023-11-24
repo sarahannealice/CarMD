@@ -1,58 +1,7 @@
 import tkinter as tk
+from symptoms import *
 
-# ----------symptom windows---------- #
-def heater_broken(root, frame):
-    frame.pack_forget()
-    root.title("Heater not Working")
-    root.configure(bg="light yellow")
-
-    frm_heater = tk.Frame(
-        master=root,
-        padx=10,
-        pady=10,
-    )
-    frm_heater.pack()
-
-    lbl_title = tk.Label(
-        master=frm_heater,
-        text="How a heating system works")
-    lbl_title.grid(row=0, column=0, columnspan=4)
-
-    # insert canvas with scrollbar here for info
-    lbl_info = tk.Label(
-        master=frm_heater,
-        text="A vehicle's heating system is also part of its cooling system.\n"
-    + "The coolant is circulated through the engine in which it absorb heat,\n "
-    + "is sent to the radiator where it dissipates. This heated coolant can be expelled through the dashboard\n "
-    + "if the heater is turned on."
-    )
-    lbl_info.grid(row=1, column=1, columnspan=2)
-
-    # insert beautiful soup web scraping here for cost to repair
-
-def ac_broken():
-    win_ac = tk.Toplevel()
-    win_ac.geometry("500x300")
-    win_ac.configure(bg="light yellow")
-    win_ac.wm_title("Heater not Working")
-
-    lbl_title = tk.Label(
-        master=win_ac,
-        text="How a heating system works")
-    lbl_title.grid(row=0, column=0, columnspan=4)
-
-    # insert canvas with scrollbar here for info
-    lbl_info = tk.Label(
-        master=win_ac,
-        text="A vehicle's heating system is also part of its cooling system.\n"
-    + "The coolant is circulated through the engine in which it absorb heat,\n "
-    + "is sent to the radiator where it dissipates. This heated coolant can be expelled through the dashboard\n "
-    + "if the heater is turned on."
-    )
-    lbl_info.grid(row=1, column=1, columnspan=2)
-
-  
-# ----------main layout---------- #
+# ----------layout of symptoms---------- #
 def symptoms_layout(root, frame):
     frame.pack_forget()
     root.title("Common Symptoms")
@@ -79,7 +28,7 @@ def symptoms_layout(root, frame):
         fg="white",
         bg="navy",
         font=14,
-        command=lambda:heater_broken(root, frame)
+        command=lambda:heater_broken(root, frm_symptoms, "How a heating system works", brkn_heater)
     )
 
     btn_ac = tk.Button(
@@ -88,7 +37,7 @@ def symptoms_layout(root, frame):
         fg="white",
         bg="navy",
         font=14,
-        command=ac_broken
+        command=lambda:ac_broken(root, frm_symptoms, "How a heating system works", brkn_ac)
     )
     
     btn_oil_leak = tk.Button(
@@ -107,7 +56,7 @@ def symptoms_layout(root, frame):
         text="return",
         bg="light grey",
         fg="black",
-        command=lambda: menu(root, frame,frm_symptoms)
+        command=lambda: menu(root, frame, frm_symptoms)
     )
     btn_menu.grid(row=2, column=0, columnspan=2)
 
@@ -117,3 +66,25 @@ def menu(root, frame, frm_symptoms):
     frame.pack(side=tk.TOP)
     root.title("CarMD")
     root.configure(bg="pink")
+
+
+# ----------individual symptom details---------- #
+brkn_heater = """A vehicle's heating system is also part of its cooling system.
+The coolant is circulated through the engine in which it absorb heat,
+is sent to the radiator where it dissipates. This heated coolant can be expelled through the dashboard
+if the heater is turned on.
+
+Some reasons your heating system isn't working could include:
+* the cooling system
+* the heater core
+* the heater valves
+* the blower fan
+
+> Cooling system issues
+    ->coolant level: if low, not enough warmed coolant may be passed to the heater core preventing
+        it from producing adequate heat.
+        
+      solution: a fix would be to top up the coolant. If the levels are low due to a leak, it would
+        be best to """
+
+brkn_ac = """this is where the info for a broken ac would go"""

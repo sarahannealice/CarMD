@@ -2,9 +2,9 @@ import tkinter as tk
 import requests
 from bs4 import BeautifulSoup
 
-def repairs(root, frame):
+def repairs(root, frame, title):
     frame.pack_forget()
-    root.title("Heater Repair Costs")
+    root.title(title)
     root.configure(bg="light sea green")
 
     frm_heater = tk.Frame(
@@ -14,22 +14,35 @@ def repairs(root, frame):
     )
     frm_heater.pack()
 
-    lbl_title = tk.Label(
-        master=frm_heater,
-        text="How a heating system works")
-    lbl_title.grid(row=0, column=0, columnspan=4)
+    heater_window = tk.Toplevel(
+
+    )
     
+    # titles
+    lbl_ptitle = tk.Label(
+        master=frm_heater,
+        text=""
+    )
+    lbl_ptitle.grid(row=1, column=0, columnspan=2)
+
+    lbl_ctitle = tk.Label(
+        master=frm_heater,
+        text=""
+    )
+    lbl_ctitle.grid(row=1, column=2, columnspan=2)
+
+    # details
     lbl_problem = tk.Label(
         master=frm_heater,
         text=""
     )
-    lbl_problem.grid(row=1, column=0, columnspan=2)
+    lbl_problem.grid(row=2, column=0, columnspan=2)
 
     lbl_costs = tk.Label(
         master=frm_heater,
         text=""
     )
-    lbl_costs.grid(row=1, column=2, columnspan=2)
+    lbl_costs.grid(row=2, column=2, columnspan=2)
 
 #-------web scraping-------#
     url = "https://vehiclechef.com/how-much-does-it-cost-to-fix-a-car-heater/"
@@ -48,12 +61,18 @@ def repairs(root, frame):
         problem = td_tags[0].text.strip()
         cost = td_tags[1].text.strip()
 
-        txt_problem += f"{problem}\n"
-        txt_cost += f"{cost}\n"
+        # bolds the titles
+        # https://stackoverflow.com/a/17303428
+        if (problem == 'Car Heater Problem'):
+            lbl_ptitle.config(text=problem, font='bold')
+            lbl_ctitle.config(text=cost, font='bold')
+        else:
+            txt_problem += f"{problem}\n"
+            txt_cost += f"{cost}\n"
 
         print(problem)
         print(cost)
         print()
-
+        
     lbl_problem.config(text=txt_problem)
     lbl_costs.config(text=txt_cost)
