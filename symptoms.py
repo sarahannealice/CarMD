@@ -1,4 +1,6 @@
 import tkinter as tk
+from repair_costs import repairs
+from repair_cost import RepairCost
 
 # ----------broken heater---------- #
 def heater_broken(root, frame, title, details):
@@ -25,6 +27,14 @@ def heater_broken(root, frame, title, details):
         text=details
     )
     lbl_info.grid(row=1, column=1, columnspan=2)
+
+    btn = tk.Button(
+        master=frm_heater,
+        text="Repair Costs",
+        #command=lambda:repairs(root, frame, "Heater Repair Costs")
+        command=RepairCost(root, frame, "Heater Repair Costs", "light sea green")
+    )
+    btn.grid(row=0, column=1)
 
     # insert beautiful soup web scraping here for cost to repair
 

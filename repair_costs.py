@@ -15,7 +15,7 @@ def repairs(root, frame, title):
     frm_heater.pack()
 
     heater_window = tk.Toplevel(
-
+        
     )
     
     # titles
