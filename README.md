@@ -20,3 +20,11 @@ colour names include:
 
 resources:
 * https://www.topcoder.com/thrive/articles/python-for-user-interface-tkinter-basics
+
+layout resources as follows:
+* https://www.youtube.com/watch?v=02_Z8OC7Dlk&ab_channel=TILTW
+* https://stackoverflow.com/a/7557028
+* https://stackoverflow.com/a/17470842
+* https://stackoverflow.com/a/17466968
+* https://www.geeksforgeeks.org/tkinter-application-to-switch-between-different-page-frames/
+* https://stackoverflow.com/a/39534704

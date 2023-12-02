@@ -1,6 +1,5 @@
 import tkinter as tk
 from repair_costs import repairs
-from repair_cost import RepairCost
 
 # ----------broken heater---------- #
 def heater_broken(root, frame, title, details):
@@ -32,7 +31,7 @@ def heater_broken(root, frame, title, details):
         master=frm_heater,
         text="Repair Costs",
         #command=lambda:repairs(root, frame, "Heater Repair Costs")
-        command=RepairCost(root, frame, "Heater Repair Costs", "light sea green")
+        command=repairs(root, frame, "Heater Repair Costs", "light sea green")
     )
     btn.grid(row=0, column=1)
 
