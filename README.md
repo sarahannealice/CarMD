@@ -16,6 +16,7 @@ colour names include:
 * light grey
 * grey
 * sea green (light/medium)
+* light (goldenrod) yellow
 * and more <https://www.tcl.tk/man/tcl/TkCmd/colors.html>
 
 resources:

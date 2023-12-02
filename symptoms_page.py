@@ -4,8 +4,8 @@ from fonts import *
 from details_page import DetailsPage
 
 class SymptomsPage(tk.Frame):
-    def __init__(self, parent, controller, title):
-        tk.Frame.__init__(self, parent, title)
+    def __init__(self, parent, controller):
+        tk.Frame.__init__(self, parent)
         self.controller = controller
 
         self.configure(bg="light blue")
@@ -24,7 +24,7 @@ class SymptomsPage(tk.Frame):
             fg="white",
             bg="navy",
             font=14,
-            command=lambda:controller.show_details("Heater not working")
+            command=lambda:self.show_details("Heater not working", brkn_heater)
         )
 
         btn_ac = tk.Button(
@@ -53,18 +53,18 @@ class SymptomsPage(tk.Frame):
             text="return",
             bg="light grey",
             fg="black",
-            command=lambda: controller.show_frame(TitlePage, "carmd")
+            command=lambda: controller.show_frame(TitlePage)
         )
         btn_home.grid(row=2, column=0, columnspan=2)
 
     def show_details(self, title, details):
-        self.controller.show_frame(DetailsPage, title)
+        self.controller.show_frame(DetailsPage, title, brkn_heater)
 
 
 
 # ----------individual symptom details---------- #
 brkn_heater = """A vehicle's heating system is also part of its cooling system.
-The coolant is circulated through the engine in which it absorb heat,
+The coolant is circulated through the engine in which it absorbs heat,
 is sent to the radiator where it dissipates. This heated coolant can be expelled through the dashboard
 if the heater is turned on.
 

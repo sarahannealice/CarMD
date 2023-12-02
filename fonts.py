@@ -1,2 +1,2 @@
-TITLE_FONT = ("Dubai", 35)
-DETAILS = ("Dubai", 16)
+TITLE = ("Dubai", 30)
+DETAILS = ("Dubai", 12)

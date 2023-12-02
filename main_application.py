@@ -34,21 +34,21 @@ class MainApplication(tk.Tk):
         title = ""
         # iterating through a tuple consisting of different page layouts
         for F in (TitlePage, SymptomsPage, DetailsPage):
-            frame = F(container, self, title)
+            frame = F(container, self)
 
             #initializing frame of that object
             self.frames[F] = frame 
             frame.grid(row=0, column=0, sticky='nsew')
 
-        self.show_frame(TitlePage, "carmd")
+        self.show_frame(TitlePage)
 
     #displays current frame
-    def show_frame(self, cont, title):
+    def show_frame(self, cont, title=None, details=None):
         frame = self.frames[cont]
         frame.tkraise()
 
         if title is not None and isinstance(frame, DetailsPage):
-            frame.update_content(title)
+            frame.update_content(title, details)
 
 
 

@@ -7,8 +7,8 @@ from page import *
 from symptoms_page import *
 
 class TitlePage(tk.Frame):
-    def __init__(self, parent, controller, title):
-        tk.Frame.__init__(self, parent, title)
+    def __init__(self, parent, controller):
+        tk.Frame.__init__(self, parent)
         self.controller = controller
         self.configure(bg="pink")
 
@@ -17,7 +17,7 @@ class TitlePage(tk.Frame):
             text="CarMD by Sarah",
             fg="navy",
             bg="pink",
-            font=TITLE_FONT,
+            font=TITLE,
             )
         label.grid(row=0, column=0)
 
@@ -27,7 +27,7 @@ class TitlePage(tk.Frame):
             bg="blue",
             fg="yellow",
             font=16,
-            command=lambda: controller.show_frame(SymptomsPage, "symptoms")
+            command=lambda: controller.show_frame(SymptomsPage)
         )
         btn_left.grid(row=1, column=0)
 
@@ -39,7 +39,3 @@ class TitlePage(tk.Frame):
             font=16
         )
         btn_right.grid(row=1, column=1)
-
-        btn1 = ttk.Button(self, text="page 1", 
-                          command=lambda: controller.show_frame(Page))
-        btn1.grid(row=1, column=1, padx=10, pady=10)
