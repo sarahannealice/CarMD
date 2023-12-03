@@ -18,6 +18,7 @@ class SymptomsPage(tk.Frame):
         )
         lbl_symptopms.grid(row=0, column=0, columnspan=3)
 
+        # button details
         btn_heater = tk.Button(
             master=self,
             text="Heater not working",
@@ -33,7 +34,7 @@ class SymptomsPage(tk.Frame):
             fg="white",
             bg="navy",
             font=14,
-            #command=lambda:ac_broken(root, frm_symptoms, "How a heating system works", brkn_ac)
+            command=lambda:self.show_details("How a heating system works", brkn_ac)
         )
         
         btn_oil_leak = tk.Button(
@@ -41,12 +42,16 @@ class SymptomsPage(tk.Frame):
             text="Car leaking oil",
             fg="white",
             bg="navy",
-            font=14
+            font=14,
+            command=lambda:self.show_details("Oil Leak", brkn_ac)
         )
+
+        # adding buttons to frame
         btn_heater.grid(row=1, column=0, padx=5, pady=5)
         btn_ac.grid(row=1, column=1, padx=5, pady=5)
         btn_oil_leak.grid(row=1, column=2, padx=5, pady=5)
 
+        # return to previous page
         from title_page import TitlePage
         btn_home = tk.Button(
             master=self,
@@ -57,8 +62,9 @@ class SymptomsPage(tk.Frame):
         )
         btn_home.grid(row=2, column=0, columnspan=2)
 
+    # uses controller to display desired details
     def show_details(self, title, details):
-        self.controller.show_frame(DetailsPage, title, brkn_heater)
+        self.controller.show_frame(DetailsPage, title, details)
 
 
 

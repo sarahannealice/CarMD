@@ -3,7 +3,6 @@ from tkinter import ttk
 
 from fonts import *
 
-from page import *
 from symptoms_page import *
 
 class TitlePage(tk.Frame):
@@ -19,7 +18,7 @@ class TitlePage(tk.Frame):
             bg="pink",
             font=TITLE,
             )
-        label.grid(row=0, column=0)
+        label.grid(row=0, column=0, columnspan=2)
 
         btn_left = tk.Button(
             master=self,

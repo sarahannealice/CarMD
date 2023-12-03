@@ -3,9 +3,9 @@ from tkinter import font as tkfont
 
         
 from title_page import TitlePage
-from page import Page
 from symptoms_page import SymptomsPage
 from details_page import DetailsPage
+from toplevel_page import DisplayToplevel
 
 class MainApplication(tk.Tk):
     """
@@ -42,7 +42,7 @@ class MainApplication(tk.Tk):
 
         self.show_frame(TitlePage)
 
-    #displays current frame
+    # displays current frame
     def show_frame(self, cont, title=None, details=None):
         frame = self.frames[cont]
         frame.tkraise()
@@ -50,7 +50,14 @@ class MainApplication(tk.Tk):
         if title is not None and isinstance(frame, DetailsPage):
             frame.update_content(title, details)
 
+    # displays popup window using toplevel()
+    def show_toplevel(self, title=None, url=None):
+        
+        # popup for repair costs
+        if title is not None:
+            DisplayToplevel.repair_cost(DisplayToplevel, title, url)
 
+        # popup for warning lights
 
 # initializing application and displaying it
 if __name__ == "__main__":
