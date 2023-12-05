@@ -12,6 +12,8 @@ class DetailsPage(tk.Frame):
 
         self.configure(bg="light goldenrod yellow")
 
+        # if statement to check which url to send
+
         self.lbl_title = tk.Label(
             master=self,
             text="",
@@ -43,7 +45,7 @@ class DetailsPage(tk.Frame):
             master=self,
             text="Repair Costs",
             #command=lambda: controller.show_toplevel(title="Heater Repair Costs", url=heater)
-            command=lambda: self.repair_cost("Heater Repair Costs", heater)
+            command=lambda: self.repair_cost(self.lbl_title.cget("text"), heater)
         )
         btn.grid(row=3, column=0, columnspan=2)
         
@@ -76,6 +78,7 @@ class DetailsPage(tk.Frame):
         tl_win.wm_title(title)
 
         tl_win.grid_rowconfigure(1, weight=1)
+        tl_win.grid_columnconfigure(0, weight=1)
         tl_win.grid_columnconfigure(1, weight=1)
 
         self.lbl_ptitle = tk.Label(
@@ -88,7 +91,7 @@ class DetailsPage(tk.Frame):
             master=tl_win,
             text=""
         )
-        self.lbl_ctitle.grid(row=0, column=1, padx=10, pady=10)
+        self.lbl_ctitle.grid(row=0, column=1, sticky='ew', padx=10, pady=10)
 
         # details
         self.lbl_problem = tk.Label(
@@ -116,7 +119,6 @@ class DetailsPage(tk.Frame):
 
         soup = BeautifulSoup(page.content, "html.parser")
         results = soup.find(class_="wp-block-table is-style-stripes")
-        print(results.prettify())
 
         txt_problem = ""
         txt_cost = ""
@@ -138,6 +140,17 @@ class DetailsPage(tk.Frame):
             
         self.lbl_problem.config(text=txt_problem)
         self.lbl_costs.config(text=txt_cost)
+
+
+    def testing(self, title, url):
+    tl_win = tk.Toplevel()
+    tl_win.geometry("500x300")
+    tl_win.configure(bg="light sea green")
+    tl_win.wm_title(title)
+
+    tl_win.grid_rowconfigure(1, weight=1)
+    tl_win.grid_columnconfigure(0, weight=1)
+    tl_win.grid_columnconfigure(1, weight=1)
 
 # -----------URLS--------- #
 heater = "https://vehiclechef.com/how-much-does-it-cost-to-fix-a-car-heater/"
