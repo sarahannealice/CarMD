@@ -1,11 +1,11 @@
 import tkinter as tk
-from tkinter import font as tkfont
 
         
 from title_page import TitlePage
 from symptoms_page import SymptomsPage
 from details_page import DetailsPage
 from toplevel_page import DisplayToplevel
+from lights_page import LightsPage
 
 class MainApplication(tk.Tk):
     """
@@ -19,7 +19,7 @@ class MainApplication(tk.Tk):
         tk.Tk.__init__(self, *args, **kwargs)
         
         self.title("CarMD")
-        self.geometry("600x400")
+        self.geometry("800x600")
         self.resizable(width=False, height=False)
 
         container = tk.Frame(self)
@@ -33,7 +33,7 @@ class MainApplication(tk.Tk):
 
         title = ""
         # iterating through a tuple consisting of different page layouts
-        for F in (TitlePage, SymptomsPage, DetailsPage):
+        for F in (TitlePage, SymptomsPage, DetailsPage, LightsPage):
             frame = F(container, self)
 
             #initializing frame of that object

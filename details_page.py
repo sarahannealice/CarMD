@@ -11,8 +11,7 @@ class DetailsPage(tk.Frame):
         self.controller = controller
 
         self.configure(bg="light goldenrod yellow")
-
-        # if statement to check which url to send
+        self.url = ""
 
         self.lbl_title = tk.Label(
             master=self,
@@ -25,13 +24,13 @@ class DetailsPage(tk.Frame):
         self.txt_details = tk.Text(
             master=self,
             wrap=tk.WORD,
-            width=57,
-            height=10,
+            width=80,
+            height=13,
             bd=0,
             bg="light yellow2",
-            font=DETAILS
+            padx=5
         )
-        self.txt_details.grid(row=1, column=0, columnspan=4, padx=25, pady=5)
+        self.txt_details.grid(row=1, column=0, columnspan=4, padx=20, pady=5)
 
         scrollb = tk.Scrollbar(
             master=self,
@@ -40,12 +39,14 @@ class DetailsPage(tk.Frame):
         scrollb.grid(row=1, column=4, sticky='nsew')
         self.txt_details['yscrollcommand'] = scrollb.set
 
+        print(self.lbl_title.cget("text"))
+
         # displays repair costs
         btn = tk.Button(
             master=self,
             text="Repair Costs",
-            #command=lambda: controller.show_toplevel(title="Heater Repair Costs", url=heater)
-            command=lambda: self.repair_cost(self.lbl_title.cget("text"), heater)
+            font=BTNS,
+            command=lambda: self.repair_cost(self.lbl_title.cget("text"))
         )
         btn.grid(row=3, column=0, columnspan=2)
         
@@ -56,22 +57,50 @@ class DetailsPage(tk.Frame):
             text="return",
             bg="light grey",
             fg="black",
+            font=BTNS,
             command=lambda: controller.show_frame(SymptomsPage)
         )
         btn_home.grid(row=3, column=2, columnspan=2)
 
-    # updates title and content of page
-    def update_content(self, title, details):
-        self.lbl_title.config(text=title)
+# -----------updates title and content of page-------------- #
 
-        self.txt_details.config(state="normal")
-        self.txt_details.delete("1.0", tk.END)
-        self.txt_details.insert(tk.END, details)
-        self.txt_details.config(state="disabled")
+    def update_content(self, title, details):
+        self.lbl_title.config(text=title)   
+
+        self.txt_details.config(state="normal") # enables text edit
+        self.txt_details.delete("1.0", tk.END) # clears text widget
+        self.txt_details.config(font=DETAILS)
+
+        for word in details:
+            start_index = self.txt_details.index(tk.END)
+
+            # skip images
+            if word.split(' ')[-2] == "Image":
+                continue
+            elif word.split(' ', 1)[0] == "*h2":
+                text = word.split(' ', 1)[1]
+                self.txt_details.tag_add('h2', start_index, self.txt_details.index(tk.END))
+                self.txt_details.insert(tk.END, '\n'+text+'\n')
+            elif word.split(' ', 1)[0] == "*p":
+                text = word.split(' ', 1)[1]
+                self.txt_details.tag_add('p', start_index, self.txt_details.index(tk.END))
+                self.txt_details.insert(tk.END, text+'\n')
+            elif word.split(' ', 1)[0] == "*li":
+                text = word.split(' ', 1)[1]
+                self.txt_details.tag_add('li', start_index, self.txt_details.index(tk.END))
+                self.txt_details.insert(tk.END, '\t*'+text+'\n')
+
+        # applying styles
+        self.txt_details.tag_config('h2', font=SUBTITLE)
+        self.txt_details.tag_config('p', font=DETAILS)
+        self.txt_details.tag_config('li', font=DETAILS)
+
+        self.txt_details.config(state="disabled") # disables text edit
+
 
 # -----------display repair cost as toplevel-------------- #
     # from toplevel_page import DisplayToplevel
-    def repair_cost(self, title, url):
+    def repair_cost(self, title):
         tl_win = tk.Toplevel()
         tl_win.geometry("500x300")
         tl_win.configure(bg="light sea green")
@@ -81,76 +110,54 @@ class DetailsPage(tk.Frame):
         tl_win.grid_columnconfigure(0, weight=1)
         tl_win.grid_columnconfigure(1, weight=1)
 
-        self.lbl_ptitle = tk.Label(
+        self.lbl_title = tk.Label(
             master=tl_win,
-            text=""
+            text="Information Unavailable",
+            font=SUBTITLE
         )
-        self.lbl_ptitle.grid(row=0, column=0, sticky='ew', padx=10, pady=10)
+        self.lbl_title.grid(row=0, column=0, sticky='ew', padx=10, pady=10)
 
-        self.lbl_ctitle = tk.Label(
-            master=tl_win,
-            text=""
-        )
-        self.lbl_ctitle.grid(row=0, column=1, sticky='ew', padx=10, pady=10)
+        # self.lbl_cost = tk.Label(
+        #     master=tl_win,
+        #     text="Cost to Replace",
+        #     font=TITLE
+        # )
+        # self.lbl_cost.grid(row=1, column=0, sticky='ew', padx=10, pady=10)
 
-        # details
-        self.lbl_problem = tk.Label(
-            master=tl_win,
-            text=""
-        )
-        self.lbl_problem.grid(row=1, column=0)
-
-        self.lbl_costs = tk.Label(
-            master=tl_win,
-            text=""
-        )
-        self.lbl_costs.grid(row=1, column=1)
-
-        self.web_scraping(url)
-
-    # popup for warning lights
-    def warning_lights(self, title, img):
-        placeholder = ""
-
-
-    #-------web scraping-------#
-    def web_scraping(self, url):
-        page = requests.get(url)
-
-        soup = BeautifulSoup(page.content, "html.parser")
-        results = soup.find(class_="wp-block-table is-style-stripes")
-
-        txt_problem = ""
-        txt_cost = ""
-
-        repairs = results.find_all("tr")
-        for repair in repairs:
-            td_tags = repair.find_all("td")
-            problem = td_tags[0].text.strip()
-            cost = td_tags[1].text.strip()
-
-            # bolds the titles
-            # https://stackoverflow.com/a/17303428
-            if (problem == 'Car Heater Problem'):
-                self.lbl_ptitle.config(text=problem, font='bold')
-                self.lbl_ctitle.config(text=cost, font='bold')
-            else:
-                txt_problem += f"{problem}\n"
-                txt_cost += f"{cost}\n"
-            
-        self.lbl_problem.config(text=txt_problem)
-        self.lbl_costs.config(text=txt_cost)
-
-
-    def testing(self, title, url):
-    tl_win = tk.Toplevel()
-    tl_win.geometry("500x300")
-    tl_win.configure(bg="light sea green")
-    tl_win.wm_title(title)
-
-    tl_win.grid_rowconfigure(1, weight=1)
-    tl_win.grid_columnconfigure(0, weight=1)
-    tl_win.grid_columnconfigure(1, weight=1)
+        # self.lbl_breakdown = tk.Label(
+        #     master=tl_win,
+        #     text="Cost Breakdown",
+        #     font=SUBTITLE
+        # )
+        # self.lbl_breakdown.grid(row=2, column=0, sticky="ew")
+    
 
 # -----------URLS--------- #
 heater = "https://vehiclechef.com/how-much-does-it-cost-to-fix-a-car-heater/"
+break_pads ="https://repairpal.com/estimator/estimate-results"
+        
+    
+#-------generic web scraping with selenium-------#
+'''
+* @brief practiced webscraping with beautiful soup but later found selenia was needed in interact with the webpage
+* desired website prevents this and i resulted to inputting the information manually
+* the resources used are:
+* https://scrapfly.io/blog/web-scraping-with-selenium-and-python/#navigating-waiting-and-retrieving-in-selenium
+* https://learn.microsoft.com/en-us/microsoft-edge/webdriver-chromium/?tabs=python
+'''
+
+# # configure webdriver
+# options = Options()
+# options.add_argument("headless")
+# options.headless = True # hides gui
+# options.add_argument('--blink-settings=imagesEnabled=false') # prevents imgs/js from loading
+
+# driver = webdriver.Edge(options=options)
+# driver.get("https://repairpal.com/estimator")
+
+# # wait for page to load
+# element = WebDriverWait(driver=driver, timeout=5).until(
+#     EC.presence_of_element_located((By.CSS_SELECTOR, 'div[data-target=zipCode]')()
+# )
+# # prints webpage elements
+# print(driver.page_source)
