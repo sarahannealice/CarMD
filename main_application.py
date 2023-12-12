@@ -4,7 +4,6 @@ import tkinter as tk
 from title_page import TitlePage
 from symptoms_page import SymptomsPage
 from details_page import DetailsPage
-from toplevel_page import DisplayToplevel
 from lights_page import LightsPage
 
 class MainApplication(tk.Tk):
@@ -50,14 +49,13 @@ class MainApplication(tk.Tk):
         if title is not None and isinstance(frame, DetailsPage):
             frame.update_content(title, details)
 
-    # displays popup window using toplevel()
-    def show_toplevel(self, title=None, url=None):
+    # # displays popup window using toplevel()
+    # def show_toplevel(self, title=None, url=None):
         
-        # popup for repair costs
-        if title is not None:
-            DisplayToplevel.repair_cost(DisplayToplevel, title, url)
+    #     # popup for repair costs
+    #     if title is not None:
+    #         DisplayToplevel.repair_cost(DisplayToplevel, title, url)
 
-        # popup for warning lights
 
 # initializing application and displaying it
 if __name__ == "__main__":

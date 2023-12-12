@@ -3,7 +3,6 @@ import requests
 from bs4 import BeautifulSoup
 
 from fonts import *
-from details_page import DetailsPage
 
 class SymptomsPage(tk.Frame):
     def __init__(self, parent, controller):
@@ -27,156 +26,157 @@ class SymptomsPage(tk.Frame):
         lbl_symptopms = tk.Label(
             master=self,
             text="Common Symptoms",
-            fg="navy",
+            fg="midnight blue",
+            bg="light blue",
             font=TITLE
         )
-        lbl_symptopms.grid(row=0, column=0, columnspan=4, sticky="ew")
+        lbl_symptopms.grid(row=0, column=0, columnspan=4)
 
     #-------buttons-------#
         #---row 1---#
         btn_heater = tk.Button(
             master=self,
-            text="Heater not working",
-            fg="white",
-            bg="navy",
+            text="Heater Not Working",
+            fg="midnight blue",
+            bg="lightsteelblue",
             font=BTNS,
-            width=10,
+            width=13,
             wraplength=110,
-            command=lambda:self.show_details("Heater not working")
+            command=lambda:self.show_details("Heater Blowing Cold Air?\nHere's Why and What to Do About It")
         )
         btn_heater.grid(row=1, column=0, pady=10)
 
         btn_ac = tk.Button(
             master=self,
-            text="A/C not working",
-            fg="white",
-            bg="navy",
+            text="A/C Not Working",
+            fg="midnight blue",
+            bg="lightsteelblue",
             font=BTNS,
             width=13,
             wraplength=110,
-            command=lambda:self.show_details("A/C not working")
+            command=lambda:self.show_details("Car AC Not Working? Weak airflow?\nTop 8 Things to Check")
         )
         btn_ac.grid(row=1, column=1, pady=10)
         
         btn_oil_leak = tk.Button(
             master=self,
-            text="Car leaking oil",
-            fg="white",
-            bg="navy",
+            text="Car Leaking Oil",
+            fg="midnight blue",
+            bg="lightsteelblue",
             font=BTNS,
             width=13,
             wraplength=110,
-            command=lambda:self.show_details("Car leaking oil")
+            command=lambda:self.show_details("Car Leaking Oil? Possible Causes\nand What to Do About It")
         )
         btn_oil_leak.grid(row=1, column=2, pady=10)
         
         btn_brk_pads = tk.Button(
             master=self,
-            text="Key won't turn",
-            fg="white",
-            bg="navy",
+            text="Key Won't Turn",
+            fg="midnight blue",
+            bg="lightsteelblue",
             font=BTNS,
             width=13,
             wraplength=110,
-            command=lambda:self.show_details("Car key won't turn")
+            command=lambda:self.show_details("What To Do If Your Ignition\nKey Won’t Turn")
         )
         btn_brk_pads.grid(row=1, column=3, pady=10)
         
         #---row 2---#
         btn_engine_hot = tk.Button(
             master=self,
-            text="Engine overheating",
-            fg="white",
-            bg="navy",
+            text="Engine Overheating",
+            fg="midnight blue",
+            bg="lightsteelblue",
             font=BTNS,
             width=13,
             wraplength=110,
-            command=lambda:self.show_details("Car engine overheating\nWhy's it happening and how to fix it")
+            command=lambda:self.show_details("Car Engine Overheating:\nWhy It’s Happening and How to Fix It")
         )
         btn_engine_hot.grid(row=2, column=0, pady=10)
 
         btn_rough_idle = tk.Button(
             master=self,
             text="Rough Idle",
-            fg="white",
-            bg="navy",
+            fg="midnight blue",
+            bg="lightsteelblue",
             font=BTNS,
             width=13,
             wraplength=110,
-            command=lambda:self.show_details("Car rough idle")
+            command=lambda:self.show_details("Rough Idle Causes and How to Fix Them")
         )
         btn_rough_idle.grid(row=2, column=1, pady=10)
         
         btn_liquid_leak = tk.Button(
             master=self,
-            text="Fluid leaks",
-            fg="white",
-            bg="navy",
+            text="Fluid Leaks",
+            fg="midnight blue",
+            bg="lightsteelblue",
             font=BTNS,
             width=13,
             wraplength=110,
-            command=lambda:self.show_details("Car fluid leaks\nWhat to do?")
+            command=lambda:self.show_details("What Fluid Is Leaking From Your Car?\nA Color-Coded Guide")
         )
         btn_liquid_leak.grid(row=2, column=2, pady=10)
         
         btn_spongy_brk = tk.Button(
             master=self,
-            text="Spongy brakes",
-            fg="white",
-            bg="navy",
+            text="Soft Brakes",
+            fg="midnight blue",
+            bg="lightsteelblue",
             font=BTNS,
             width=13,
             wraplength=110,
-            command=lambda:self.show_details("Soft, spongy brakes\nWhat to do?")
+            command=lambda:self.show_details("Soft, Spongy Brakes and What to Do")
         )
         btn_spongy_brk.grid(row=2, column=3, pady=10)
         
         #---row 3---#
         btn_car_pull = tk.Button(
             master=self,
-            text="Pulling left/right",
-            fg="white",
-            bg="navy",
+            text="Pulling Left/Right",
+            fg="midnight blue",
+            bg="lightsteelblue",
             font=BTNS,
             width=13,
             wraplength=110,
-            command=lambda:self.show_details("Car pulling left/right")
+            command=lambda:self.show_details("Why is My Car Pulling to the Left or Right?")
         )
         btn_car_pull.grid(row=3, column=0, pady=10)
 
         btn_car_shake = tk.Button(
             master=self,
-            text="Car shaking",
-            fg="white",
-            bg="navy",
+            text="Car Shaking",
+            fg="midnight blue",
+            bg="lightsteelblue",
             font=BTNS,
             width=13,
             wraplength=110,
-            command=lambda:self.show_details("Car shaking reasons")
+            command=lambda:self.show_details("Why Is Your Vehicle Shaking?\nSymptoms, Causes and Solutions")
         )
         btn_car_shake.grid(row=3, column=1, pady=10)
         
         btn_shake_brk = tk.Button(
             master=self,
-            text="Brakes vibrate",
-            fg="white",
-            bg="navy",
+            text="Battery Not Jumping",
+            fg="midnight blue",
+            bg="lightsteelblue",
             font=BTNS,
             width=13,
             wraplength=110,
-            command=lambda:self.show_details("What is causing my brakes to vibrate?")
+            command=lambda:self.show_details("Jumpstart Not Working?\nHere Are The Possible Reasons")
         )
         btn_shake_brk.grid(row=3, column=2, pady=10)
         
         btn_bat_replace = tk.Button(
             master=self,
-            text="Engine stalling",
-            fg="white",
-            bg="navy",
+            text="Engine Stalling",
+            fg="midnight blue",
+            bg="lightsteelblue",
             font=BTNS,
             width=13,
             wraplength=110,
-            command=lambda:self.show_details("Engine stalling after battery replacement")
+            command=lambda:self.show_details("How to Fix Stalling and Other Issues\nAfterReplacing the Battery")
         )
         btn_bat_replace.grid(row=3, column=3, pady=10)
 
@@ -187,8 +187,9 @@ class SymptomsPage(tk.Frame):
             master=self,
             text="return",
             bg="light grey",
-            fg="black",
-            font=DETAILS,
+            fg="navy",
+            font=BTNS,
+            width=10,
             command=lambda: controller.show_frame(TitlePage)
         )
         btn_home.grid(row=4, column=0, columnspan=4)
@@ -197,44 +198,45 @@ class SymptomsPage(tk.Frame):
     def show_details(self, title):
         details = ""
         # if statement to check which url to send
-        if title == "Heater not working":
+        if title == "Heater Blowing Cold Air?\nHere's Why and What to Do About It":
             self.url = heater
             details = self.web_scraping()
-        elif title == "A/C not working":
+        elif title == "Car AC Not Working? Weak airflow?\nTop 8 Things to Check":
             self.url = ac
             details = self.web_scraping()
-        elif title == "Car leaking oil":
+        elif title == "Car Leaking Oil? Possible Causes\nand What to Do About It":
             self.url = oil_leak
             details = self.web_scraping()
-        elif title == "Car key won't turn":
+        elif title == "What To Do If Your Ignition\nKey Won’t Turn":
             self.url = key_stuck
             details = self.web_scraping()
-        elif title == "Car engine overheating\nWhy's it happening and how to fix it":
-            self.url = key_stuck
+        elif title == "Car Engine Overheating:\nWhy It’s Happening and How to Fix It":
+            self.url = engine_hot
             details = self.web_scraping()
-        elif title == "Car rough idle":
-            self.url = key_stuck
+        elif title == "Rough Idle Causes and How to Fix Them":
+            self.url = rough_idle
             details = self.web_scraping()
-        elif title == "Car fluid leaks\nWhat to do?":
-            self.url = key_stuck
+        elif title == "What Fluid Is Leaking From Your Car?\nA Color-Coded Guide":
+            self.url = liquid_leak
             details = self.web_scraping()
-        elif title == "Soft, spongy brakes\nWhat to do?":
-            self.url = key_stuck
+        elif title == "Soft, Spongy Brakes and What to Do":
+            self.url = spongy_brake
             details = self.web_scraping()
-        elif title == "Car pulling left/right":
-            self.url = key_stuck
+        elif title == "Why is My Car Pulling to the Left or Right?":
+            self.url = car_pulling
             details = self.web_scraping()
-        elif title == "Car shaking reasons":
-            self.url = key_stuck
+        elif title == "Why Is Your Vehicle Shaking?\nSymptoms, Causes and Solutions":
+            self.url = car_shaking
             details = self.web_scraping()
-        elif title == "What is causing my brakes to vibrate?":
-            self.url = key_stuck
+        elif title == "Jumpstart Not Working?\nHere Are The Possible Reasons":
+            self.url = jumpstart
             details = self.web_scraping()
-        elif title == "Engine stalling after battery replacement":
-            self.url = key_stuck
+        elif title == "How to Fix Stalling and Other Issues\nAfter Replacing the Battery":
+            self.url = after_battery_replace
             details = self.web_scraping()
 
-
+        
+        from details_page import DetailsPage
         self.controller.show_frame(DetailsPage, title, details)
 
 
@@ -275,7 +277,7 @@ spongy_brake = "https://repairpal.com/symptoms/soft-spongy-brakes-what-to-do"
 """---"""
 car_pulling = "https://repairpal.com/symptoms/car-pulling-left-right"
 car_shaking = "https://repairpal.com/symptoms/car-shaking-reasons"
-shake_brake = "https://repairpal.com/symptoms/what-is-causing-my-brakes-to-vibrate"
+jumpstart = "https://repairpal.com/symptoms/car-battery-wont-jumpstart"
 after_battery_replace = "https://repairpal.com/symptoms/engine-stalling-after-battery-replacement"
 
 
