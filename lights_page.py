@@ -32,82 +32,90 @@ class LightsPage(tk.Frame):
         label.grid(row=0, column=0, columnspan=3)
         
     #-------load icones-------#
-        charge = tk.PhotoImage(file = "./icons/check_engine.gif") 
+    # https://stackoverflow.com/a/3366046
+        self.check = tk.PhotoImage(file='./icons/car_small.png') 
+        self.brakes = tk.PhotoImage(file='./icons/parking_small.png') 
+        self.battery = tk.PhotoImage(file='./icons/charging_sys_small.png') 
+        self.abs = tk.PhotoImage(file='./icons/abs_small.png') 
+        self.tires = tk.PhotoImage(file='./icons/tire_pressure_small.png') 
+        self.oil = tk.PhotoImage(file='./icons/low_oil_small.png')
+
 
 
     #-------buttons-------#
         #---row 1---#
         btn_check = tk.Button(
             master=self,
-            text="Check Engine",
+            image=self.check,
             fg="dark slate blue",
             bg="lavender",
-            width=13,
+            height=150,
+            width=150,
             font=BTNS,
             command=lambda:self.show_details("Check Engine Light On")
         )
         btn_check.grid(row=1, column=0, pady=10)
 
-        btn_ac = tk.Button(
+        btn_brks = tk.Button(
             master=self,
-            text="Brakes",
+            image=self.brakes,
             fg="dark slate blue",
             bg="lavender",
             font=BTNS,
-            width=13,
-            wraplength=110,
+            height=150,
+            width=150,
             command=lambda:self.show_details("What to Do When Your\nBrake Warning Light Is On")
         )
-        btn_ac.grid(row=1, column=1, pady=10)
+        btn_brks.grid(row=1, column=1, pady=10)
         
-        btn_oil_leak = tk.Button(
+        btn_battery = tk.Button(
             master=self,
-            text="Battery",
+            image=self.battery,
             fg="dark slate blue",
             bg="lavender",
             font=BTNS,
-            width=13,
-            wraplength=110,
+            height=150,
+            width=150,
             command=lambda:self.show_details("What Your Car's Battery Warning Light Means")
         )
-        btn_oil_leak.grid(row=1, column=2, pady=10)
+        btn_battery.grid(row=1, column=2, pady=10)
         
         #---row 2---#
-        btn_engine_hot = tk.Button(
+        btn_abs = tk.Button(
             master=self,
-            text="ABS",
+            image=self.abs,
             fg="dark slate blue",
             bg="lavender",
             font=BTNS,
-            width=13,
-            wraplength=110,
+            height=150,
+            width=150,
             command=lambda:self.show_details("Why Your Car's ABS Light Is On,\nand What It Means")
         )
-        btn_engine_hot.grid(row=2, column=0, pady=10)
+        btn_abs.grid(row=2, column=0, pady=10)
 
-        btn_rough_idle = tk.Button(
+        btn_tires = tk.Button(
             master=self,
-            text="Check Engine",
+            image=self.tires,
             fg="dark slate blue",
             bg="lavender",
             font=BTNS,
-            width=13,
-            wraplength=110,
-            command=lambda:self.show_details("Why Is My Engine\nTemperature Warning Light On?")
+            height=150,
+            width=150,
+            command=lambda:self.show_details("Tire Pressure Warning Light:\nWhat It Means, and What to Do About It")
         )
-        btn_rough_idle.grid(row=2, column=1, pady=10)
+        btn_tires.grid(row=2, column=1, pady=10)
         
-        btn_liquid_leak = tk.Button(
+        btn_oil = tk.Button(
             master=self,
-            text="Low Oil",
+            image=self.oil,
             fg="dark slate blue",
             bg="lavender",
             font=BTNS,
-            width=13,
-            wraplength=110,
+            height=150,
+            width=150,
             command=lambda:self.show_details("What Your Oil Warning Lights Mean,\nand What to Do")
         )
-        btn_liquid_leak.grid(row=2, column=2, pady=10)
+        btn_oil.grid(row=2, column=2, pady=10)
 
 
         # return to previous page
@@ -140,8 +148,8 @@ class LightsPage(tk.Frame):
         elif title == "Why Your Car's ABS Light Is On,\nand What It Means":
             self.url = abs
             details = self.web_scraping()
-        elif title == "Why Is My Engine\nTemperature Warning Light On?":
-            self.url = engine_temp
+        elif title == "Tire Pressure Warning Light:\nWhat It Means, and What to Do About It":
+            self.url = tires
             details = self.web_scraping()
         elif title == "What Your Oil Warning Lights Mean,\nand What to Do":
             self.url = oil
@@ -181,7 +189,7 @@ brakes = "https://repairpal.com/brake-hydraulic-system-red-warning-light"
 battery = "https://repairpal.com/symptoms/charging-system-warning-light"
 """---"""
 abs = "https://repairpal.com/symptoms/abs-warning-light"
-engine_temp = "https://repairpal.com/engine-temperature-warning-light"
+tires = "https://repairpal.com/tire-pressure-warning-light"
 oil = "https://repairpal.com/low-oil-pressure-warning-light"
 
 

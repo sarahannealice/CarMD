@@ -82,7 +82,8 @@ class DetailsPage(tk.Frame):
         # checks if displaying dash light, removes repair cost button if so
         if (title == "Check Engine Light On" or title == "What to Do When Your\nBrake Warning Light Is On" or 
             title == "What Your Car's Battery Warning Light Means" or title == "Why Your Car's ABS Light Is On,\nand What It Means" or 
-            title == "Why Is My Engine\nTemperature Warning Light On?" or title == "What Your Oil Warning Lights Mean,\nand What to Do"):
+            title == "Tire Pressure Warning Light:\nWhat It Means, and What to Do About It" or 
+            title == "What Your Oil Warning Lights Mean,\nand What to Do"):
             
             self.btn_costs.grid_forget()
             self.btn_return.grid(row=3, column=0, columnspan=2)
